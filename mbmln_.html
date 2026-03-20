@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Selamat Idul Fitri 1447 H</title>
+    <style>
+        :root {
+            /* TEMA HIJAU IDUL FITRI */
+            --bg-deep: #011f15;
+            --bg-mid: #0a422b;
+            --bg-light: #167a50;
+            --gold: #f1c40f;
+            --gold-glow: #ffdf00;
+            --text-gold: #ffec85;
+            --white-glow: #ffffff;
+            --primary-font: 'Poppins', sans-serif;
+            --serif-font: 'Playfair Display', serif;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+            background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-light) 100%);
+            font-family: var(--primary-font); color: white;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* --- Latar Belakang --- */
+        #sky { position: fixed; width: 100%; height: 100%; z-index: 1; }
+        .star {
+            position: absolute; background-color: white; border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* --- Siluet Masjid --- */
+        .masjid-siluet {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 35vh;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23042e1f" fill-opacity="1" d="M0,224L60,202.7C120,181,240,139,360,138.7C480,139,600,181,720,202.7C840,224,960,224,1080,192C1200,160,1320,96,1380,64L1440,32L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path><path fill="%23f1c40f" d="M360,110 C360,50 420,0 480,0 C540,0 600,50 600,110 Z M840,160 C840,110 890,70 940,70 C990,70 1040,110 1040,160 Z" fill-opacity="0.6"></path></svg>') no-repeat bottom;
+            background-size: cover; z-index: 2; opacity: 0.9;
+        }
+
+        /* --- Konten Utama --- */
+        #main-container {
+            z-index: 10; text-align: center; width: 85%; max-width: 380px;
+            max-height: 90vh; overflow-y: auto; scrollbar-width: none;
+        }
+        #main-container::-webkit-scrollbar { display: none; }
+
+        .welcome-screen {
+            display: flex; flex-direction: column; align-items: center;
+            transition: opacity 1s, transform 1s;
+        }
+        .eid-calligraphy {
+            font-size: 2.8em; color: var(--text-gold); text-shadow: 0 0 20px var(--gold-glow);
+            margin-bottom: 20px; font-family: var(--serif-font);
+        }
+        .open-btn {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--text-gold) 100%);
+            border: none; color: var(--bg-deep); padding: 12px 30px;
+            font-size: 1em; font-weight: bold; border-radius: 30px;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
+            font-family: inherit;
+        }
+
+        .greeting-card {
+            background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); border-radius: 20px;
+            padding: 25px 15px; border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            opacity: 0; transform: scale(0.8) translateY(30px);
+            transition: all 1s ease-out; display: none;
+        }
+        .greeting-card.show { display: block; opacity: 1; transform: scale(1) translateY(0); }
+
+        .card-header {
+            color: var(--text-gold); font-size: 1.5em; margin-top: 0; font-family: var(--serif-font);
+            text-shadow: 0 0 10px var(--gold-glow); margin-bottom: 12px;
+        }
+
+        /* --- Teks Mengetik --- */
+        .typing-container {
+            font-size: 0.85em; line-height: 1.5; color: #fff;
+            min-height: 70px; text-align: center; margin-bottom: 15px;
+        }
+        #typedText { display: inline; }
+        .cursor { color: var(--gold-glow); animation: blink 0.7s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+        /* --- UI Dompet Digital (Khusus DANA) --- */
+        .thr-section {
+            opacity: 0; transform: translateY(15px); transition: all 1s ease;
+            margin-top: 10px; background: rgba(0, 0, 0, 0.25);
+            padding: 15px; border-radius: 12px; border: 1px solid rgba(241, 196, 15, 0.3);
+        }
+        .thr-section.show { opacity: 1; transform: translateY(0); }
+
+        .thr-title {
+            color: var(--gold); font-weight: bold; font-size: 0.95em;
+            margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .wallet-box {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.1); padding: 10px 15px;
+            border-radius: 8px; margin: 0;
+        }
+        
+        .wallet-name { font-weight: bold; font-size: 1.1em; }
+        .wallet-name.dana { color: #118EEA; text-shadow: 0 0 8px rgba(17,142,234,0.4); }
+        
+        .btn-action {
+            background: var(--gold); color: #000; text-decoration: none;
+            padding: 8px 15px; border-radius: 6px; font-weight: bold;
+            font-size: 0.85em; transition: 0.3s; text-align: center;
+            border: none; cursor: pointer; font-family: inherit;
+            display: inline-block;
+        }
+        .btn-action:hover { background: var(--gold-glow); transform: scale(1.05); }
+
+        .sender-info {
+            margin-top: 15px; font-size: 0.8em; color: var(--text-gold); font-weight: bold;
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="sky"></div>
+    <div class="masjid-siluet"></div>
+
+    <div id="main-container">
+        <div class="welcome-screen" id="welcome-screen">
+            <div class="eid-calligraphy">عيد فطر سعيد</div>
+            <button class="open-btn" onclick="openGreeting()">buka ucapan</button>
+        </div>
+
+        <div class="greeting-card" id="greetingCard">
+            <h1 class="card-header">Selamat Idul Fitri <br> 1447 H</h1>
+            <div class="typing-container">
+                <span id="typedText"></span><span class="cursor">|</span>
+            </div>
+            
+            <div class="thr-section" id="thrSection">
+                <div class="thr-title">Kirim THR Bima</div>
+                
+                <div class="wallet-box">
+                    <span class="wallet-name dana">DANA</span>
+                    <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012012023110454942568" class="btn-action" target="_blank">Kirim THR</a>
+                </div>
+
+            </div>
+
+            <p class="sender-info">— Dari Bima Sekeluarga —</p>
+        </div>
+    </div>
+
+    <script>
+        // Teks sudah dirapikan agar enter-nya pas
+        const messageText = `Taqabbalallahu minna wa
+        minkum taqobbal ya karim\nMinal 'aidin wal-faizin,\n mohon maaf lahir dan batin`;
+
+        function createStars() {
+            const count = 150;
+            const sky = document.getElementById('sky');
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = (Math.random() * 2 + 1) + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                sky.appendChild(star);
+            }
+        }
+
+        const typedTextSpan = document.getElementById("typedText");
+        let charIndex = 0;
+
+        function typeText() {
+            if (charIndex < messageText.length) {
+                let char = messageText.charAt(charIndex);
+                if (char === '\n') {
+                    // DIBUAT 1 ENTER SAJA AGAR JARAKNYA RAPAT DAN RAPI
+                    typedTextSpan.innerHTML += '<br>';
+                } else {
+                    typedTextSpan.innerHTML += char;
+                }
+                charIndex++;
+                setTimeout(typeText, 50);
+            } else {
+                setTimeout(() => {
+                    document.getElementById('thrSection').classList.add('show');
+                }, 400);
+            }
+        }
+
+        function openGreeting() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const greetingCard = document.getElementById('greetingCard');
+
+            welcomeScreen.style.opacity = '0';
+            welcomeScreen.style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                greetingCard.style.display = 'block';
+                setTimeout(() => {
+                    greetingCard.classList.add('show');
+                    setTimeout(typeText, 600); 
+                }, 50);
+            }, 800);
+        }
+
+        window.onload = () => {
+            createStars();
+        };
+    </script>
+</body>
+</html>
