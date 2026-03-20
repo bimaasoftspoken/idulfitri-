@@ -121,8 +121,14 @@
         }
         .btn-action:hover { background: var(--gold-glow); transform: scale(1.05); }
 
+        /* --- Info Pengirim --- */
         .sender-info {
             margin-top: 15px; font-size: 0.8em; color: var(--text-gold); font-weight: bold;
+            opacity: 0; /* Awalnya sembunyi */
+            transition: opacity 1s ease; /* Efek muncul perlahan */
+        }
+        .sender-info.show {
+            opacity: 1; /* Muncul setelah dipanggil JS */
         }
 
     </style>
@@ -137,6 +143,7 @@
         <div class="welcome-screen" id="welcome-screen">
             <div class="eid-calligraphy">عيد فطر سعيد</div>
             <button class="open-btn" onclick="openGreeting()">buka ucapan</button>
+        
         </div>
 
         <div class="greeting-card" id="greetingCard">
@@ -155,7 +162,7 @@
 
             </div>
 
-            <p class="sender-info">— dari bima jgn lupa thrnya wkwkwk—</p>
+            <p class="sender-info">— jangan lupa thrnya wkwkw —</p>
         </div>
     </div>
 
@@ -186,7 +193,6 @@
             if (charIndex < messageText.length) {
                 let char = messageText.charAt(charIndex);
                 if (char === '\n') {
-                    // DIBUAT 1 ENTER SAJA AGAR JARAKNYA RAPAT DAN RAPI
                     typedTextSpan.innerHTML += '<br>';
                 } else {
                     typedTextSpan.innerHTML += char;
@@ -194,8 +200,15 @@
                 charIndex++;
                 setTimeout(typeText, 50);
             } else {
+                // Teks mengetik selesai, munculkan THR
                 setTimeout(() => {
                     document.getElementById('thrSection').classList.add('show');
+                    
+                    // Setelah THR muncul (tunggu 1 detik), baru munculkan teks pengirim
+                    setTimeout(() => {
+                        document.querySelector('.sender-info').classList.add('show');
+                    }, 1000); 
+
                 }, 400);
             }
         }
